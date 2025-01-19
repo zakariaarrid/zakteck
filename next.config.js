@@ -4,8 +4,8 @@ const { withContentlayer } = require("next-contentlayer");
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  output: "export", // Enables static HTML export
-  basePath: '/zakteck', // Only if deploying to GitHub Pages in a repo that's not username.github.io
+  //output: "export", // Enables static HTML export
+  //basePath: '/zakteck', // Only if deploying to GitHub Pages in a repo that's not username.github.io
   images: {
     unoptimized: true,
   },
