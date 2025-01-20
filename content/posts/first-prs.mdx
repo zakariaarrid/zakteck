@@ -1,0 +1,101 @@
+---
+title: My First Pull Requests at Laravel
+description: 
+date: "2025-01-20"
+---
+I’m excited to share my journey of contributing to Laravel through my pull requests. Here’s a list of the closed and merged PRs I’ve worked on
+
+---
+## [PULL REQUEST #53224](https://github.com/laravel/framework/pull/53224) <small>(closed for now)</small>
+
+## 1. Introduction of the `whereDateDiff` Function in Laravel Query Builder
+The `whereDateDiff` function is a new addition to Laravel's Query Builder that simplifies date-based queries. It enables developers to calculate the difference between two dates and filter results based on specific conditions. Supporting multiple databases, including MySQL, SQLite, SQL Server, and PostgreSQL, this function ensures consistency and versatility across different environments.
+
+## 2. Understanding the Function Signature of whereDateDiff
+The whereDateDiff function comes with the following signature:
+```html
+whereDateDiff($column1, $column2, $operator, $value, $unit = 'day', $boolean = 'and')
+```
+
+* `column1`: The first date column to compare.
+* `$column2`: The second date column or value to compare against.
+* `$operator`: The comparison operator `(e.g., '=', '>', '<')`.
+* `$value`: The value to compare the date difference to.
+* `$unit`: The time unit <small>**('year', 'month', 'week', 'day', 'hour', 'minute', 'second')**</small>. Defaults to 'day'.
+* `$boolean`: Logical operator ('and', 'or'). Defaults to 'and'.
+
+## 3. Mastering the $unit Parameter in `whereDateDiff`
+The $unit parameter allows precise control over the date difference calculation. Supported units include:
+
+    * **year**: Calculates the difference in years.
+    * **month**: Calculates the difference in months.
+    * **week**: Calculates the difference in weeks.
+    * **day**: Calculates the difference in days (default).
+    * **hour**: Calculates the difference in hours.
+    * **minute**: Calculates the difference in minutes.
+    * **second**: Calculates the difference in seconds.
+
+This flexibility makes `whereDateDiff` suitable for various use cases, from yearly comparisons to second-level granularity.    
+
+## 4. Practical Examples of Using `whereDateDiff` in Laravel Queries
+
+### Example 1: Comparing Dates in a Table ###
+
+```html
+DB::table('posts')->whereDateDiff('created_at', 'updated_at', '=', 5)->get();
+```
+
+### Example 2: Using Models
+
+```html
+`Post::whereDateDiff('published_at', now(), '`<`', 7)->get();`
+```
+
+### Example 3: Combining with Other Conditions
+
+```html
+`User::where('active', true)->orWhereDateDiff('last_login', now(), '`>`', 30)->get();`
+```
+
+
+## 5. Database-Specific Implementations of whereDateDiff
+
+### MySQL
+
+Uses the DATEDIFF function:
+
+```html
+SELECT * FROM users WHERE DATEDIFF('2023-12-31', created_at) = 0;
+```
+
+### MySQL
+
+Uses the DATEDIFF function:
+
+```html
+SELECT * FROM users WHERE DATEDIFF('2023-12-31', created_at) = 0;
+```
+
+### SQLite
+
+Calculates the difference using julianday:
+
+```html
+SELECT * FROM posts WHERE CAST(julianday(created_at) - julianday('2023-12-31') AS INTEGER) = 0;
+```
+
+### SQL Server
+
+Leverages the DATEDIFF function with a specified unit:
+
+```html
+SELECT * FROM posts WHERE DATEDIFF(day, '2023-12-31', created_at) = 0;
+```
+
+### PostgreSQL
+
+Uses DATE_PART for precise date calculations:
+
+```html
+SELECT * FROM posts WHERE DATE_PART('day', created_at - '2023-12-31')::integer = 0;
+```
