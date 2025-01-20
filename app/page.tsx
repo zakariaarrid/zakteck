@@ -11,14 +11,20 @@ export default function Home() {
        <Description />
       </div>   
       <h2>Posts</h2>   
-      {allPosts.map((post) => (
-        <article key={post._id}>
-          <p className="mb-0 text-sm font-bold text-gray-500">{format(new Date(post.date), 'MMM dd, yyyy')}</p>
-          <Link href={post.slug}>
-            <h2 className="mt-0">{post.title}</h2>
-          </Link>
-        </article>
-      ))}
+      {allPosts.map((post) => {       
+      if (!post._raw.sourceFileName.includes('pull-request')) {
+        return (
+          <article key={post._id}>
+            <p className="mb-0 text-sm font-bold text-gray-500">
+              {format(new Date(post.date), 'MMM dd, yyyy')}
+            </p>
+            <Link href={post.slug}>
+              <h2 className="mt-0">{post.title}</h2>
+            </Link>
+          </article>
+        );
+      } 
+})}
     </div>
   )
 }
