@@ -6,6 +6,7 @@ const nextConfig = {
   swcMinify: true,
   output: 'export',  // Enable static export
   basePath: process.env.NODE_ENV === 'production' ? '/zakteck' : '',
+  trailingSlash: true,  
   images: {
     unoptimized: true,
   },
