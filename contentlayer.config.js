@@ -23,7 +23,7 @@ export const Page = defineDocumentType(() => ({
     },
     description: {
       type: "string",
-    },
+    },    
   },
   computedFields,
 }))
@@ -39,11 +39,14 @@ export const Post = defineDocumentType(() => ({
     },
     description: {
       type: "string",
-    },
+    },   
     date: {
       type: "date",
       required: true,
     },
+    show: {
+      type: "boolean",
+    }
   },
   computedFields,
 }))

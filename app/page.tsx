@@ -10,9 +10,12 @@ export default function Home() {
       <div className="pt-6">
        <Description />
       </div>   
-      <h2>Posts</h2>   
-      {allPosts.map((post) => {       
-      if (!post._raw.sourceFileName.includes('pull-request')) {
+      <h2>Posts</h2>  
+       
+      {allPosts.map((post) => {  
+      console.log(post.show);
+
+      if (post.show) {
         return (
           <article key={post._id}>
             <p className="mb-0 text-sm font-bold text-gray-500">
