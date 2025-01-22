@@ -5,14 +5,18 @@ import { format } from 'date-fns';
 
 
 export default function Home() {
+  // Sort posts by date (descending order)
+  const sortedPosts = allPosts
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+
   return (
     <div className="prose dark:prose-invert">
       <div className="pt-6">
        <Description />
       </div>   
       <h2>Posts</h2>       
-      {allPosts
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      {sortedPosts
       .map((post) => {  
       console.log(post.show);
 
