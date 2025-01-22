@@ -10,9 +10,10 @@ export default function Home() {
       <div className="pt-6">
        <Description />
       </div>   
-      <h2>Posts</h2>  
-       
-      {allPosts.map((post) => {  
+      <h2>Posts</h2>       
+      {allPosts
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .map((post) => {  
       console.log(post.show);
 
       if (post.show) {
