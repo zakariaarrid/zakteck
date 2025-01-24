@@ -15,7 +15,7 @@ export default function Home() {
       <div className="pt-6">
        <Description />
       </div>   
-      <h2>Pinned Posts</h2> 
+      <h2>Pinned Posts </h2> 
       {sortedPosts
       .map((post) => {  
           if (post.pin) {
