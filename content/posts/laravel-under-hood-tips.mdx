@@ -23,7 +23,8 @@ show: true
             'price' => 100,
         ]);
 
-        // Optionally dispatch an event after committing the transaction as solution 1
+        // Optionally dispatch an event after committing 
+        // the transaction as solution 1
         OrderCreated::dispatch($order)->afterCommit();
        
     });
