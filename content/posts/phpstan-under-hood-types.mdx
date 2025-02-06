@@ -1,0 +1,32 @@
+---
+title: Under-the-hood PHPStan types
+description: 
+date: "2025-02-06"
+show: true
+---
+
+## 1. 3. What Does int-mask-of<CONSTNAME_*> Mean ?
+#The integer is a bitmask composed of one or more JSON_* constants.
+
+#Example 
+
+```html
+/**
+ * Encodes data to JSON with customizable flags.
+ *
+ * @param array $data The data to encode.
+ * @param int-mask-of<JSON_*> $flags Bitmask of JSON_* constants.
+ * @return string The JSON-encoded string.
+ */
+function encodeJson(array $data, int $flags): string {
+    return json_encode($data, $flags);
+}
+
+// Usage
+$data = ['name' => 'Alice', 'age' => 30];
+$json = encodeJson($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+echo $json;
+```
+
+
+### I will add under-the-hood functions gradually, day by day. .... by
