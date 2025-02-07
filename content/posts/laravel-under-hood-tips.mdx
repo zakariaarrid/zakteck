@@ -32,4 +32,16 @@ show: true
 
 or go to the queue.php config and enable after_commit 
 
+## 2. class_uses_recursive() Helper
+
+ class_uses_recursive() is used to retrieve all traits used by a given class
+```html
+    if (! in_array(Batchable::class, class_uses_recursive($job))) {
+        throw new RuntimeException(sprintf('Attempted to batch job [%s], 
+        but it does not use the Batchable trait.', $job::class));
+    }
+```
+
+or go to the queue.php config and enable after_commit 
+
 ### I will add under-the-hood functions gradually, day by day. .... by
