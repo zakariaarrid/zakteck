@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 export default function Home() {
   // Sort posts by date (descending order)
   const sortedPosts = allPosts
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => new Date(b.update ?? b.date).getTime() - new Date(b.update ?? a.date).getTime());
 
 
   return (
@@ -22,7 +22,7 @@ export default function Home() {
             return (
               <article key={post._id}>
                 <p className="mb-0 text-sm font-bold text-gray-500">
-                  {format(new Date(post.date), 'MMM dd, yyyy')}
+                  {format(new Date(post.date), 'MMM dd, yyyy')} {post.update ? ("updated:" + format(new Date(post.update), 'MMM dd, yyyy')) : ''}
                 </p>
                 <Link href={post.slug}>
                   <h4 className="mt-0">{post.title}</h4>
@@ -39,7 +39,7 @@ export default function Home() {
         return (
           <article key={post._id}>
             <p className="mb-0 text-sm font-bold text-gray-500">
-              {format(new Date(post.date), 'MMM dd, yyyy')}
+            {format(new Date(post.date), 'MMM dd, yyyy')} {post.update ? `(updated: ${format(new Date(post.update), 'MMM dd, yyyy')} )` : ''}             
             </p>
             <Link href={post.slug}>
               <h4 className="mt-0">{post.title}</h4>

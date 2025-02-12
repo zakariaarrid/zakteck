@@ -2,6 +2,7 @@
 title: Under-the-hood PHP tips
 description: 
 date: "2025-01-24"
+update: "2025-02-12"
 show: true
 ---
 
@@ -14,5 +15,36 @@ show: true
 
     // ["1", "2", 3]
 ```
+
+## 2. Enum-Based Strategy Pattern in PHP
+```html
+enum EmailValidation
+{
+    case NoRfcWarnings;
+    case DnsCheck;
+    case SpoofCheck;
+    case Filter;
+    case Rfc;
+
+    public function validation()
+    {
+        return match ($this) {
+            self::NoRfc => new NoRFCWarningsValidation(),
+            self::Dns => new DNSCheckValidation(),
+            self::SpoofCheck => new SpoofCheckValidation(),
+            self::Filter => new FilterEmailValidation(),
+            default => new RFCValidation(),
+        }
+    }
+}
+
+
+public static function isEmail(string $value, ?EmailValidation $rule = null): bool
+{
+    $validator = new EmailValidator();
+    return $validator->isValid($value, $rule?->validation() ?? new RFCValidation());
+}
+```
+
 
 ### I will add under-the-hood functions gradually, day by day. .... by
