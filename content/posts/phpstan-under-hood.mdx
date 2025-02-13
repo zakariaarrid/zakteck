@@ -1,11 +1,11 @@
 ---
-title: Under-the-hood PHPStan types
+title: Under-the-hood PHPStan
 description: 
 date: "2025-02-06"
 show: true
 ---
 
-## 1.3. What Does int-mask-of&lt;CONSTNAME_*&gt; Mean?
+## 1. What Does int-mask-of&lt;CONSTNAME_*&gt; Mean?
 The integer is a bitmask composed of one or more `JSON_*` constants.
 
 #Example 
@@ -25,3 +25,17 @@ function encodeJson(array $data, int $flags): string {
 // Usage
 $data = ['name' => 'Alice', 'age' => 30];
 $json = encodeJson($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
+
+
+## 2. ignoreErrors in phpstan config file
+
+
+#Example 
+
+```html
+parameters:
+	ignoreErrors:
+		-
+			identifier: trait.unused
+```
